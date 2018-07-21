@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Position property demo</title>
+    <style>
+    div.banner{
+        display:block;
+        width:100%;
+    }
+
+    div.banner > img{
+        width:100%;
+    }
+
+    div.container{
+        position: relative;
+    }
+
+    div.container > .text{
+        position:absolute;
+        top:160px;
+        left:30px;
+        font-size:2em;
+        color:#2e33bb;
+        font-family: Courier;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="banner">
+                <img src="images/banner.jpeg" alt="scenery" title="sunset image">
+        </div>
+        <div class="text">
+            Sometimes loneliness is good!
+        </div>
+    </div>
+    
+    
+    
+</body>
+</html>
