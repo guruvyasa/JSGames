@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="btn">hello</div>
+    <script>
+    window.onload = function(){
+        let expr = "";
+        let button = document.querySelector('.btn');
+        button.addEventListener('click',function(){
+            alert(this);
+        })
+        document.addEventListener('keypress',function(event){
+            alert(this);
+            
+            if (event.key === "Enter")
+                {alert(expr);
+                alert(eval(expr));}
+            else
+                expr += event.key;
+        });
+    }
+    </script>
+</body>
+</html>
