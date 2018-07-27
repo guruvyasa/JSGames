@@ -11,7 +11,7 @@
     }
     div.drop{
         position:absolute;
-        background-image: url("drop.jpg");
+        background-image: url("assets/drop.jpg");
         background-size: cover;
         width:100px;
         height:100px;
@@ -23,6 +23,12 @@
 </head>
 <body>
     <div class="container">
+            <div id="player">
+                    <audio autoplay hidden>
+                     <source src="assets/Ringtone.mp3" type="audio/mpeg">
+                                If you're reading this, audio isn't supported. 
+                    </audio>
+                </div>
        
     </div>
     <script>
@@ -32,6 +38,7 @@
             this.operand2 = operand2;
             this.operator = operator;
             this.top = 0;
+            this.result = eval(this.operand1+this.operator+this.operand2);
         }
 
         move(){
@@ -81,7 +88,26 @@
             this.drops.forEach(drop => drop.move());
             // console.log(this);
             // setTimeout(this,50);
-        },50);
+        },150);
+        }
+
+        markForRemoval(drop){
+           
+            drop.element.innerHTML="";
+            drop.element.style.backgroundImage = "url('assets/splash.jpeg')";
+            setTimeout(()=>{
+                this.container.removeChild(drop.element);
+            },10);
+        }
+
+
+
+        updateDrops(result){
+            this.drops = this.drops.map(drop =>{
+                if(drop.result == result)
+                    this.markForRemoval(drop)
+                return drop;
+            }).filter(drop => drop.result != result);
         }
         
         setUpKeyHandling(){
@@ -90,7 +116,9 @@
             
             if (event.key === "Enter")
                 {
-                alert(eval(this.expr));}
+                this.updateDrops(this.expr);
+                this.expr = '';
+                }
             else
                 this.expr += event.key;
             });
@@ -98,7 +126,7 @@
         setUpUtils(){
 
             return {
-                genOperand:() => Math.round(Math.random()*100),
+                genOperand:() => Math.round(Math.random()*10),
                 genOperator : () => ['+','-','*','/'][Math.round(Math.random()*10)%4],
                 getDropPosition : () => Math.round(Math.random()*1000)%(window.innerWidth)
             };
